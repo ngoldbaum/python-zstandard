@@ -59,17 +59,24 @@ jobs:
       # Activate Python development mode so we get warnings.
       PYTHONDEVMODE: '1'
     steps:
-      - name: Set up Python
+      - name: Set up free-threaded Python
+        if: matrix.py == '3.13t'
         uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.py }}
           enable-cache: false
 
       - name: Install pip
+        if: matrix.py == '3.13t'
         run: |
-          uv venv
           uv pip install --python ${{ matrix.py }} pip
-          source .venv/bin/activate
+
+      - name: Set up Python
+        if: matrix.py != '3.13t'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.py }}
+          architecture: ${{ matrix.arch }}
 
       - name: Install Rust
         if: matrix.arch == 'x64' && !startsWith(matrix.py, '3.13')
