@@ -68,10 +68,11 @@ jobs:
             pyproject.toml
             Cargo.toml
 
-      - name: install pip
+      - name: Install pip
         run: |
           uv pip install --python ${{ matrix.py }} pip
           pip install -U setuptools
+          echo $(which python)
 
       - name: Install Rust
         if: matrix.arch == 'x64' && !startsWith(matrix.py, '3.13')
