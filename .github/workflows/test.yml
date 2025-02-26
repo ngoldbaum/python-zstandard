@@ -73,6 +73,7 @@ jobs:
           uv pip install --python ${{ matrix.py }} pip
           pip install -U setuptools
           echo $(which python)
+          python -VV
 
       - name: Install Rust
         if: matrix.arch == 'x64' && !startsWith(matrix.py, '3.13')
