@@ -62,13 +62,13 @@ jobs:
       - name: Set up free-threaded Python
         if: matrix.py == '3.13t'
         uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.py }}
 
       - name: Install pip
         if: matrix.py == '3.13t'
         run: |
-          uv venv --python ${{ matrix.py }}
           uv pip install --python ${{ matrix.py }} pip
-          source .venv/bin/activate
 
       - name: Set up Python
         if: matrix.py != '3.13t'
