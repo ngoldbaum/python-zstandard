@@ -121,3 +121,7 @@ jobs:
           PYTHON_ZSTANDARD_IMPORT_POLICY: 'rust'
         run: |
           pytest --numprocesses=auto --hypothesis-profile=${HYPOTHESIS_PROFILE} -v tests/
+
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
