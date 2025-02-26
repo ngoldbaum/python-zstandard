@@ -63,17 +63,13 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.py }}
-          cache-dependency-glob: |
-            ci/requirements.txt
-            pyproject.toml
-            Cargo.toml
+          enable-cache: false
 
       - name: Install pip
         run: |
+          uv venv
           uv pip install --python ${{ matrix.py }} pip
-          pip install -U setuptools
-          echo $(which python)
-          python -VV
+          source .venv/bin/activate
 
       - name: Install Rust
         if: matrix.arch == 'x64' && !startsWith(matrix.py, '3.13')
