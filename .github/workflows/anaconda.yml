@@ -83,6 +83,7 @@ jobs:
       - name: Install Dependencies
         run: |
           C:\Miniconda\envs\env\python.exe -m pip install --user --require-hashes -r ci/requirements.txt -c ci/constraints.txt
+          C:\Miniconda\envs\env\python.exe -m pip install --user setuptools -c ci/constraints.txt
 
       - name: Build and Test
         run: |
