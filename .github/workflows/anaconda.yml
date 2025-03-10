@@ -42,8 +42,7 @@ jobs:
       - name: Build and Test
         run: |
           source $CONDA/bin/activate env
-          $CONDA/bin/conda build ci/conda
-          python ci/copy-conda-package.py
+          $CONDA/bin/conda build --output-folder dist ci/conda
 
       - name: Upload Package
         uses: actions/upload-artifact@v4
@@ -87,8 +86,7 @@ jobs:
 
       - name: Build and Test
         run: |
-          C:\Miniconda\envs\env\Scripts\conda-build.exe ci/conda
-          C:\Miniconda\envs\env\python.exe ci/copy-conda-package.py
+          C:\Miniconda\envs\env\Scripts\conda-build.exe --output-folder dist ci/conda
 
       - name: Upload Package
         uses: actions/upload-artifact@v4
