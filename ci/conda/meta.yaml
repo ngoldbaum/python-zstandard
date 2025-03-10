@@ -11,6 +11,7 @@ requirements:
   build:
     - python
     - setuptools
+    - {{ compiler('c') }}
 
   run:
     - python
