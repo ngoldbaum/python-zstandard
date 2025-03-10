@@ -31,7 +31,7 @@ jobs:
 
       - name: Create Anaconda Environment
         run: |
-          $CONDA/bin/conda create --yes --quiet --name env python=${{ matrix.py }} conda-build pip
+          $CONDA/bin/conda create --yes --quiet --name env -c conda-forge --override-channels python=${{ matrix.py }} conda-build pip
 
       - name: Install Dependencies
         run: |
@@ -76,7 +76,7 @@ jobs:
 
       - name: Create Anaconda Environment
         run: |
-          C:\Miniconda\condabin\conda.bat create --yes --quiet --name env python=${{ matrix.py }} conda-build pip
+          C:\Miniconda\condabin\conda.bat create --yes --quiet --name env -c conda-forge --override-channels python=${{ matrix.py }} conda-build pip
 
       - name: Install Dependencies
         run: |
