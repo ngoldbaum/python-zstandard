@@ -31,12 +31,11 @@ jobs:
 
       - name: Create Anaconda Environment
         run: |
-          $CONDA/bin/conda create --yes --quiet --name env python=${{ matrix.py }}
+          $CONDA/bin/conda create --yes --quiet --name env -c conda-forge --override-channels python=${{ matrix.py }} conda-build pip
 
       - name: Install Dependencies
         run: |
           source $CONDA/bin/activate env
-          $CONDA/bin/conda install --yes --quiet --name env conda-build pip
           pip install --require-hashes -r ci/requirements.txt -c ci/constraints.txt
 
       - name: Build and Test
@@ -67,6 +66,8 @@ jobs:
       ZSTD_WARNINGS_AS_ERRORS: '1'
       # More thorough fuzzing coverage.
       HYPOTHESIS_PROFILE: 'ci'
+      # conda-build can't find libarchive so we override it with this
+      LIBARCHIVE: 'C:\\Miniconda\\envs\\env\\Library\\bin\\archive.dll'
     steps:
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -77,12 +78,12 @@ jobs:
 
       - name: Create Anaconda Environment
         run: |
-          C:\Miniconda\condabin\conda.bat create --yes --quiet --name env python=${{ matrix.py }}
+          C:\Miniconda\condabin\conda.bat create --yes --quiet --name env -c conda-forge --override-channels python=${{ matrix.py }} conda-build pip
 
       - name: Install Dependencies
         run: |
-          C:\Miniconda\condabin\conda.bat install --yes --quiet --name env conda-build pip
-          C:\Miniconda\envs\env\python.exe -m pip install --user --require-hashes -r ci/requirements.txt
+          C:\Miniconda\envs\env\python.exe -m pip install --user --require-hashes -r ci/requirements.txt -c ci/constraints.txt
+          C:\Miniconda\envs\env\python.exe -m pip install --user setuptools -c ci/constraints.txt
 
       - name: Build and Test
         run: |
