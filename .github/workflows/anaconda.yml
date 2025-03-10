@@ -82,7 +82,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          C:\Miniconda\condabin\conda.bat install --yes --quiet --name env conda-build pip
+          C:\Miniconda\condabin\conda.bat install --yes --quiet --name env conda-build pip libarchive
           C:\Miniconda\envs\env\python.exe -m pip install --user --require-hashes -r ci/requirements.txt
 
       - name: Build and Test
